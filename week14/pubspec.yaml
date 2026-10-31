@@ -1,0 +1,21 @@
+# ห้ามเปลี่ยน name เพราะเวิร์กโฟลว์และไฟล์ทดสอบใช้ชื่อนี้ (ชื่อแอปใต้ไอคอนแก้ที่ AndroidManifest.xml)
+name: lablae_shop
+description: แอปร้านลับแลของฝาก ตัวอย่างประกอบหนังสือบทที่ 8
+publish_to: 'none'
+# TODO 2: เพิ่มเลขรุ่นทุกครั้งที่ส่งแอปรุ่นใหม่ เช่น 1.0.1+2 (ตัวเลขหลัง + ต้องเพิ่มขึ้นเสมอ)
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true

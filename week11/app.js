@@ -1,7 +1,12 @@
-// สัปดาห์ที่ 11 ลบสินค้า โทรหาร้าน นำทาง และแนบสลิป
-// คัดลอกอาร์เรย์ products ของร้านกลุ่มจาก week10 มาแทนบรรทัดถัดไป
+// ใบงานที่ 11: ความสามารถของมือถือ รับชำระเงิน และส่งออเดอร์ (ทำ TODO 1-5 ตามบทที่ 7)
+const PROMPTPAY = "0800000000";   // เบอร์พร้อมเพย์ของร้าน (สมมติ)
+const LINE_ID = "@lablae-demo"; // TODO 1: LINE ID สมมติของ LINE Official Account ร้านกลุ่ม
 const products = [
-  { id: 1, name: "สินค้า 1", price: 100, unit: "ชิ้น", image: "images/product1.jpg" },
+  { id: 1, name: "ทุเรียนหลงลับแล", price: 350, unit: "กก.", image: "images/durian.jpg" },
+  { id: 2, name: "ลางสาด", price: 60, unit: "กก.", image: "images/longkong.jpg" },
+  { id: 3, name: "ข้าวแคบ", price: 40, unit: "ห่อ", image: "images/khaokhaep.jpg" },
+  { id: 4, name: "ทุเรียนกวน", price: 150, unit: "กล่อง", image: "images/durian-paste.jpg" },
+  { id: 5, name: "กล้วยตาก", price: 50, unit: "ห่อ", image: "images/banana.jpg" },
 ];
 
 // ----- แสดงสินค้า -----
@@ -58,11 +63,65 @@ function showCart() {
       <button class="remove" onclick="removeFromCart(${p.id})">ลบ</button></li>`;
   }
   document.querySelector("#cart-total").textContent = total;
+  showCheckout(total);
 }
 
 function removeFromCart(id) {
-  // TODO 1: สร้างตะกร้าใหม่ newCart ที่มีทุกรายการยกเว้นรายการที่ item.id ตรงกับ id
-  //         แล้วใส่ cart = newCart; จากนั้นเรียก saveCart(); และ showCart();
+  const newCart = [];
+  for (const item of cart) {
+    if (item.id !== id) {
+      newCart.push(item);
+    }
+  }
+  cart = newCart;
+  saveCart();
+  showCart();
+}
+
+// ----- ชำระเงินและส่งออเดอร์ -----
+function showCheckout(total) {
+  document.querySelector("#pay-total").textContent = total;
+  if (total > 0) {
+    // TODO 3: สร้าง QR พร้อมเพย์ตามยอด total ลงในแท็ก id="qr" ด้วย makePromptPayQR
+  } else {
+    document.querySelector("#qr").innerHTML = "<p>ยังไม่มีสินค้าในตะกร้า</p>";
+  }
+  const link = "#"; // TODO 4: ลิงก์ oaMessage ที่เข้ารหัส LINE_ID และ orderText() ด้วย encodeURIComponent
+  const button = document.querySelector("#send-line");
+  // ส่งออเดอร์ได้เมื่อมีสินค้าและลูกค้ารับทราบนโยบายแล้ว (ความยินยอมรับข่าวสารไม่บังคับ)
+  // TODO 5: ส่งได้เมื่อมีสินค้า และ ติ๊กช่อง id="notice" แล้ว (เพิ่มเงื่อนไขที่สองด้วย &&)
+  if (total > 0) {
+    button.href = link;
+    button.classList.remove("disabled");
+  } else {
+    button.href = "#";
+    button.classList.add("disabled");
+  }
+}
+
+function orderText() {
+  let text = "สั่งซื้อจากหน้าร้าน\n";
+  let total = 0;
+  for (const item of cart) {
+    const p = findProduct(item.id);
+    const sum = p.price * item.qty;
+    total = total + sum;
+    text += "- " + p.name + " x " + item.qty + " = " + sum + " บาท\n";
+  }
+  text += "รวม " + total + " บาท";
+  if (document.querySelector("#marketing").checked) {
+    text += "\nยินยอมรับข่าวสารจากร้าน";
+  }
+  return text;
+}
+
+function copyOrder() {
+  if (cart.length === 0) {
+    alert("ยังไม่มีสินค้าในตะกร้า");
+    return;
+  }
+  navigator.clipboard.writeText(orderText());
+  alert("คัดลอกข้อความออเดอร์แล้ว นำไปวางในแชต LINE ของร้านได้");
 }
 
 // ----- แสดงรูปสลิปที่เลือกหรือถ่าย (เตรียมไว้ให้) -----
@@ -89,15 +148,7 @@ function loadCart() {
 showProducts();
 showCart();
 
-// ----- ส่วนท้าทาย (ข): ระยะทางเป็นกิโลเมตรจากพิกัดสองจุด (เตรียมไว้ให้) -----
-// ตัวอย่างการเรียกใช้ เมื่อได้ lat lng ของลูกค้าแล้ว และร้านอยู่ที่พิกัด 17.65, 100.04
-//   const d = distanceKm(lat, lng, 17.65, 100.04);
-//   alert("ระยะทางไปร้าน " + d.toFixed(1) + " กม.");
-function distanceKm(lat1, lng1, lat2, lng2) {
-  const r = 6371;
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLng = (lng2 - lng1) * Math.PI / 180;
-  const a = Math.sin(dLat / 2) ** 2 +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
-  return 2 * r * Math.asin(Math.sqrt(a));
+// ----- ลงทะเบียน service worker (เตรียมไว้ให้ ไม่ต้องแก้) -----
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
 }

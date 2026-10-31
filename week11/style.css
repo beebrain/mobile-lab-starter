@@ -121,6 +121,41 @@ img {
   margin-top: 8px;
 }
 
+/* บทที่ 8: QR และหน้านโยบาย */
+#qr svg {
+  display: block;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.consent {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-top: 12px;
+}
+
+.consent input {
+  width: 24px;
+  height: 24px;
+}
+
+.button.disabled {
+  background-color: #9e9e9e;
+  pointer-events: none;
+}
+
+/* ลิงก์นโยบายท้ายหน้า ตัวเล็กกว่าเนื้อหา */
+.muted {
+  font-size: 14px;
+  text-align: center;
+  margin-top: 24px;
+}
+
+.muted a {
+  color: #777777;
+}
+
 /* ยังไม่ได้เลือกรูป: ซ่อนแท็กรูปไว้ */
 #slip:not([src]) {
   display: none;

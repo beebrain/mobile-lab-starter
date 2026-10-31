@@ -1,0 +1,63 @@
+# สร้างไฟล์ APK ของแอปในโฟลเดอร์ week14/ ทุกครั้งที่คอมมิตไฟล์ในโฟลเดอร์นั้น แล้วแนบไว้ในหน้า Releases
+# ผู้เรียนไม่ต้องแก้ไฟล์นี้ ดูผลที่แท็บ Actions: เครื่องหมายถูกสีเขียว = สำเร็จ กากบาทสีแดง = เปิดงานนั้นแล้วอ่านหน้าสรุป
+name: สร้าง APK (week14)
+
+on:
+  push:
+    # อัปโหลดภาพหรือแก้ README ใน week14 ไม่ต้อง build ใหม่ (ใช้ ! ใน paths เพราะใช้ paths คู่กับ paths-ignore ไม่ได้)
+    paths: ['week14/**', '!week14/*.jpg', '!week14/*.png', '!week14/README.md']
+  workflow_dispatch:
+
+permissions:
+  contents: write   # ใช้สร้าง Release และแนบไฟล์ APK
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: week14
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      # สร้างไฟล์ในโฟลเดอร์ android/ ที่ยังไม่มี ด้วย Flutter รุ่นเดียวกับที่ใช้ build
+      # ไฟล์ที่มีอยู่แล้ว เช่น AndroidManifest.xml lib/main.dart และ test/ จะไม่ถูกเขียนทับ
+      - name: เตรียมไฟล์ Android
+        run: flutter create --org com.example --project-name lablae_shop --platforms android .
+
+      - run: flutter pub get
+
+      - name: ตรวจโค้ด
+        run: |
+          if ! flutter analyze --no-fatal-infos --no-fatal-warnings > analyze.txt; then
+            echo "## โค้ดมีข้อผิดพลาด แก้ตามบรรทัดด้านล่าง ลองใน DartPad ให้ผ่านก่อน แล้วคอมมิตใหม่" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            grep -E "^\s*error" analyze.txt >> "$GITHUB_STEP_SUMMARY" || cat analyze.txt >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+
+      - name: ทดสอบว่าแอปเปิดได้
+        run: flutter test
+
+      - name: สร้าง APK
+        run: flutter build apk --release
+
+      - name: แนบ APK ในหน้า Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "apk-${{ github.run_number }}" build/app/outputs/flutter-apk/app-release.apk \
+            --title "แอปร้าน รุ่นที่ ${{ github.run_number }}" \
+            --notes "สร้างจากคอมมิต ${{ github.sha }} เปิดหน้านี้บนมือถือ Android แล้วแตะ app-release.apk เพื่อดาวน์โหลด"
+          echo "## สร้าง APK สำเร็จ เปิดหน้า Releases ของคลังบนมือถือ Android เพื่อดาวน์โหลด app-release.apk" >> "$GITHUB_STEP_SUMMARY"

@@ -3,30 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ชื่อร้าน</title>
+  <title>ลับแลของฝาก</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2e7d32">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body>
-  <!-- แก้ชื่อร้านในแท็ก h1 และ title ให้ตรงกับร้านของกลุ่ม -->
-  <h1>ชื่อร้าน</h1>
+  <h1>ลับแลของฝาก</h1>
   <h2>สินค้าทั้งหมด</h2>
   <div id="products"></div>
 
-  <h2>ตะกร้าสินค้า <span id="cart-count"></span></h2>
+  <h2>ตะกร้าสินค้า</h2>
   <ul id="cart"></ul>
   <p class="total">รวม <span id="cart-total">0</span> บาท</p>
 
-  <h2>ติดต่อร้าน</h2>
-  <!-- TODO 2: เบอร์สมมติของร้าน และพิกัดหรือชื่อสถานที่ของร้านหลัง destination= -->
-  <a class="button" href="tel:0800000000">โทรหาร้าน</a>
-  <a class="button" href="https://www.google.com/maps/dir/?api=1&destination=Laplae+Uttaradit">นำทางไปร้าน</a>
-  <!-- ส่วนท้าทาย (ก): เพิ่มปุ่มชวนเพื่อนมาซื้อตรงนี้ได้ เช่น <button class="button" onclick="shareShop()">ชวนเพื่อนมาซื้อ</button> -->
-  <!-- ส่วนท้าทาย (ข): เพิ่มปุ่มระยะทางไปร้านตรงนี้ได้ เช่น <button class="button" onclick="checkDistance()">ระยะทางไปร้าน</button> -->
+  <h2>ชำระเงิน</h2>
+  <p>สแกน QR พร้อมเพย์ด้วยแอปธนาคาร ยอด <span id="pay-total">0</span> บาท</p>
+  <div id="qr"></div>
 
   <h2>แนบสลิปการโอนเงิน</h2>
-  <!-- TODO 3: เพิ่ม accept="image/*" ในแท็ก input ให้รับเฉพาะไฟล์รูป -->
+  <!-- TODO 2 (ส่วนที่ 1): เพิ่ม accept="image/*" ในแท็ก input ด้านล่าง -->
   <input type="file" onchange="showPreview(this)">
   <img id="slip" alt="รูปสลิปที่เลือก">
+
+  <h2>ส่งออเดอร์</h2>
+  <label class="consent">
+    <input type="checkbox" id="notice" onchange="showCart()">
+    <span>ฉันอ่าน<a href="privacy.html" target="_blank">นโยบายความเป็นส่วนตัว</a>แล้ว</span>
+  </label>
+  <label class="consent">
+    <input type="checkbox" id="marketing" onchange="showCart()">
+    <span>ยินยอมให้ร้านส่งข่าวสารและโปรโมชันทาง LINE (ไม่บังคับ)</span>
+  </label>
+  <a class="button disabled" id="send-line" href="#">ส่งออเดอร์ทาง LINE</a>
+  <button class="button" onclick="copyOrder()">คัดลอกข้อความออเดอร์</button>
+
+  <h2>ติดต่อร้าน</h2>
+  <!-- TODO 2 (ส่วนที่ 2): แก้เบอร์โทรสมมติและปลายทางแผนที่ให้เป็นของร้านกลุ่ม -->
+  <a class="button" href="tel:0800000000">โทรหาร้าน</a>
+  <a class="button" href="https://www.google.com/maps/dir/?api=1&destination=Laplae+Uttaradit">นำทางไปร้าน</a>
+  <p class="muted"><a href="privacy.html" target="_blank">นโยบายความเป็นส่วนตัว</a></p>
+  <script src="qrcode.min.js"></script>
+  <script src="promptpay-helper.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

@@ -8,11 +8,12 @@
     body { font-family: sans-serif; font-size: 18px; margin: 16px; color: #333333; }
     li { margin: 12px 0; }
     a { color: #2e7d32; }
+    .note { color: #666666; font-size: 16px; }
   </style>
 </head>
 <body>
   <h1>งานรายสัปดาห์ (mobile-lab)</h1>
-  <p>หน้านี้เป็นสารบัญของคลัง แตะชื่อสัปดาห์เพื่อเปิดงานของสัปดาห์นั้น สัปดาห์ที่ไม่มีหน้าเว็บ (2 3 4 8 15) จะขึ้น 404 ได้ ให้เปิดไฟล์ README ของสัปดาห์นั้นบน github.com แทน</p>
+  <p>หน้านี้เป็นสารบัญของคลัง แตะชื่อสัปดาห์เพื่อเปิดงานของสัปดาห์นั้น สัปดาห์ที่ไม่มีหน้าเว็บ (2 3 4 8 12-15) อาจขึ้น 404 ให้เปิดไฟล์ README ของสัปดาห์นั้นบน github.com แทน</p>
   <ul>
     <li><a href="week01/">สัปดาห์ที่ 1 สำรวจสิทธิ์ของแอป</a></li>
     <li><a href="week02/">สัปดาห์ที่ 2 เลือกอุปกรณ์และรูปแบบแอป</a></li>
@@ -24,11 +25,25 @@
     <li><a href="week08/">สัปดาห์ที่ 8 ตรวจความก้าวหน้าโครงงาน</a></li>
     <li><a href="week09/">สัปดาห์ที่ 9 รายการสินค้าจากอาร์เรย์</a></li>
     <li><a href="week10/">สัปดาห์ที่ 10 ตะกร้าที่จำค่าได้</a></li>
-    <li><a href="week11/">สัปดาห์ที่ 11 ลบสินค้า โทร นำทาง แนบสลิป</a></li>
-    <li><a href="week12/">สัปดาห์ที่ 12 ติดตั้งบนจอโฮม</a></li>
-    <li><a href="week13/">สัปดาห์ที่ 13 QR พร้อมเพย์และ LINE</a></li>
-    <li><a href="week14/">สัปดาห์ที่ 14 นโยบายความเป็นส่วนตัว</a></li>
-    <li><a href="week15/">สัปดาห์ที่ 15 นำเสนอโครงงาน</a></li>
+    <li><a href="week11/">สัปดาห์ที่ 11 ติดต่อร้าน ชำระเงิน ส่งออเดอร์ และติดตั้งบนจอโฮม</a></li>
   </ul>
+  <h2>แอป Android ด้วย Flutter</h2>
+  <p class="note">สัปดาห์ 12-14 เป็นโค้ด Flutter ไม่มีหน้าเว็บ ลิงก์ด้านล่างเปิดไฟล์บน github.com และหน้า Releases ที่มีไฟล์ APK</p>
+  <ul>
+    <li><a data-gh="tree/main/week12">สัปดาห์ที่ 12 หน้าแรกของแอปร้าน (โค้ด)</a></li>
+    <li><a data-gh="tree/main/week13">สัปดาห์ที่ 13 รายการสินค้าและตะกร้า (โค้ด)</a></li>
+    <li><a data-gh="tree/main/week14">สัปดาห์ที่ 14 build APK (โค้ด)</a></li>
+    <li><a data-gh="releases">ไฟล์ APK ในหน้า Releases (เปิดบนมือถือ Android)</a></li>
+    <li><a data-gh="actions">ผลการ build ในแท็บ Actions</a></li>
+  </ul>
+  <p><a href="week15/">สัปดาห์ที่ 15 นำเสนอโครงงาน</a></p>
+  <script>
+    // สร้างลิงก์ github.com จากที่อยู่ของหน้านี้ เช่น somchai.github.io/mobile-lab/ -> github.com/somchai/mobile-lab
+    const user = location.hostname.split(".")[0];
+    const repo = location.pathname.split("/")[1];
+    for (const a of document.querySelectorAll("[data-gh]")) {
+      a.href = "https://github.com/" + user + "/" + repo + "/" + a.dataset.gh;
+    }
+  </script>
 </body>
 </html>
