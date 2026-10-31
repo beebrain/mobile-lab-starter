@@ -40,6 +40,7 @@ jobs:
       - name: ตรวจโค้ด
         run: |
           if ! flutter analyze --no-fatal-infos --no-fatal-warnings > analyze.txt; then
+            cat analyze.txt   # ให้เห็นใน log ด้วย ไม่ใช่แค่หน้าสรุป
             echo "## โค้ดมีข้อผิดพลาด แก้ตามบรรทัดด้านล่าง ลองใน DartPad ให้ผ่านก่อน แล้วคอมมิตใหม่" >> "$GITHUB_STEP_SUMMARY"
             echo '```' >> "$GITHUB_STEP_SUMMARY"
             grep -E "^\s*error" analyze.txt >> "$GITHUB_STEP_SUMMARY" || cat analyze.txt >> "$GITHUB_STEP_SUMMARY"
