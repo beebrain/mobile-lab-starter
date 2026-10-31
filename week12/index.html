@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ชื่อร้าน</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- TODO 2: เพิ่มแท็ก link ที่บอกว่ามี manifest.json ตรงนี้ แล้วแก้ theme-color ให้ตรงกับ manifest.json -->
+  <meta name="theme-color" content="#2e7d32">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+</head>
+<body>
+  <!-- แก้ชื่อร้าน เบอร์โทร และปลายทางแผนที่ให้ตรงกับ week11 (อย่าคัดลอก index.html จาก week11 มาทับทั้งไฟล์) -->
+  <h1>ชื่อร้าน</h1>
+  <h2>สินค้าทั้งหมด</h2>
+  <div id="products"></div>
+
+  <h2>ตะกร้าสินค้า <span id="cart-count"></span></h2>
+  <ul id="cart"></ul>
+  <p class="total">รวม <span id="cart-total">0</span> บาท</p>
+
+  <h2>ติดต่อร้าน</h2>
+  <a class="button" href="tel:0800000000">โทรหาร้าน</a>
+  <a class="button" href="https://www.google.com/maps/dir/?api=1&destination=Laplae+Uttaradit">นำทางไปร้าน</a>
+
+  <h2>แนบสลิปการโอนเงิน</h2>
+  <input type="file" accept="image/*" onchange="showPreview(this)">
+  <img id="slip" alt="รูปสลิปที่ถ่าย">
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+/* สัปดาห์ที่ 6 แต่งหน้ารายการสินค้า ทำตาม TODO 1-4 */
+
+body {
+  font-family: sans-serif;
+  font-size: 18px;
+  margin: 0;
+  padding: 16px;
+  /* TODO 1: สีตัวอักษร (color) และสีพื้นหลัง (background-color) ตามต้นแบบ Figma */
+}
+
+h1 {
+  margin: 0;
+  /* TODO 1: สีชื่อร้าน */
+}
+
+/* ปุ่มแผนที่และปุ่มสั่งซื้อ (class="button") เตรียมไว้ให้แล้ว */
+.button {
+  display: block;
+  width: 100%;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  margin-top: 12px;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  background-color: #2e7d32; /* TODO 1: เปลี่ยนเป็นสีปุ่มจาก Figma */
+  border: none;
+  border-radius: 12px;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.cover {
+  border-radius: 12px;
+}
+
+.price {
+  margin-top: 4px;
+  margin-bottom: 0;
+  /* TODO 2: ทำให้ราคาเด่น เช่น สีหรือตัวหนา (font-weight: bold;) */
+}
+
+.card {
+  /* TODO 3: กรอบการ์ด ได้แก่ background-color, border, border-radius, padding, margin-bottom */
+
+  /* TODO 4: เรียงรูปกับชื่อในแถวเดียว ได้แก่ display: flex; align-items: center; gap: 12px; */
+}
+
+.card img {
+  /* TODO 4: ความกว้างรูปในการ์ด เช่น width: 96px; */
+}
+
+.card h3 {
+  margin: 0;
+}
+
+/* ส่วนท้าทาย: เมื่อจอกว้างตั้งแต่ 600 px ให้กล่องแม่ .products แสดงการ์ด 2 คอลัมน์
+   เขียน media query ที่นี่ และอธิบายแต่ละบรรทัดในหมายเหตุ */

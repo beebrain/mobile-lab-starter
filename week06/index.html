@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ชื่อร้าน</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- แก้ชื่อร้าน คำอธิบายร้าน และรูปหน้าร้าน ให้เหมือนใน week05 -->
+  <h1>ชื่อร้าน</h1>
+  <p>คำอธิบายร้าน</p>
+  <img class="cover" src="images/shop.jpg" alt="หน้าร้าน">
+
+  <h2>สินค้าแนะนำ</h2>
+  <div class="products">
+    <!-- การ์ดสินค้าแต่ละใบ: แก้ชื่อใน h3 ราคาใน p class="price" และ src กับ alt ของรูป -->
+    <div class="card">
+      <img src="images/product1.jpg" alt="สินค้า 1">
+      <div>
+        <h3>สินค้า 1</h3>
+        <p class="price">0 บาท</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/product2.jpg" alt="สินค้า 2">
+      <div>
+        <h3>สินค้า 2</h3>
+        <p class="price">0 บาท</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/product3.jpg" alt="สินค้า 3">
+      <div>
+        <h3>สินค้า 3</h3>
+        <p class="price">0 บาท</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- แก้เวลาเปิดปิด และคำค้นหลัง q= ให้เป็นร้านของกลุ่ม (เหมือน week05) -->
+  <h2>ติดต่อร้าน</h2>
+  <p>เปิด ... น. ถึง ... น.</p>
+  <a class="button" href="https://maps.google.com/?q=ชื่อร้าน+Uttaradit">ดูแผนที่ร้าน</a>
+  <button class="button">สั่งซื้อ</button>
+</body>
+</html>
