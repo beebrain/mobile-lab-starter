@@ -4,5 +4,4 @@
 
 ส่วนท้าทาย: กรอกตอนท้ายของ `analysis.md` สำหรับร้านของกลุ่ม
 
-สิ่งที่ส่ง: ลิงก์ไฟล์บน github.com (สัปดาห์นี้ไม่มีหน้าเว็บ จึงไม่ใช่ลิงก์ GitHub Pages)
-https://github.com/<ชื่อผู้ใช้>/mobile-lab/blob/main/week02/analysis.md
+สิ่งที่ส่ง: คอมมิต `analysis.md` ผู้สอนเปิดตรวจไฟล์นี้บน github.com ไม่ต้องส่งลิงก์
